@@ -1,7 +1,18 @@
 import Head from 'next/head'
 import { Container, Footer, Layout, Navbar, Hero } from '../components';
 
-const HomePage = () => {
+const plans_urls = require('../resources/data/available-plans.json');
+
+export async function getStaticProps() {
+  
+  const plans = plans_urls.data.availablePlans
+
+  return {
+    props: {plans}
+  }
+}
+
+const HomePage = ({plans}) => {
   return (
     <Layout>
       <Head>
@@ -51,19 +62,14 @@ const HomePage = () => {
 
       <Container>
         <h2 id="planos" className="uk-text-center uk-margin-bottom">Conheça nossos planos</h2>
-        <div className="uk-column-1-4">
-          <div className="uk-placeholder uk-margin-large-bottom uk-text-center">
-            Você deve implementar os componentes de listagem de planos.
-          </div>
-          <div className="uk-placeholder uk-margin-large-bottom uk-text-center">
-            Você deve implementar os componentes de listagem de planos.
-          </div>
-          <div className="uk-placeholder uk-margin-large-bottom uk-text-center">
-            Você deve implementar os componentes de listagem de planos.
-          </div>
-          <div className="uk-placeholder uk-margin-large-bottom uk-text-center">
-            Você deve implementar os componentes de listagem de planos.
-          </div>
+        <div className="uk-column-1-3">
+          {plans?.map((plan)=> {
+            return plan.type === "individual" ?
+              <div key={plan.planId} className="uk-placeholder uk-margin-large-bottom uk-text-center">
+                {plan.offerInfo.name}
+              </div> :  null
+            })
+          }
         </div>
       </Container>
 
@@ -74,12 +80,13 @@ const HomePage = () => {
           </div>
           <div>
             <h3>Pacotes recomendados</h3>
-            <div className="uk-placeholder">
-              <p>Você deve implementar os componentes de recomendações</p>
-            </div>
-            <div className="uk-placeholder">
-              <p>Você deve implementar os componentes de recomendações</p>
-            </div>
+            {plans?.map((plan)=> {
+              return plan.type === "bundle" ?
+                <div key={plan.planId} className="uk-placeholder">
+                  {plan.offerInfo.name}
+                </div> :  null
+              })
+            }                 
           </div>
         </div>
         <p className="uk-text-center uk-margin-large-bottom">
