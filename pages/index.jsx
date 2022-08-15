@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import { Container, Footer, Layout, Navbar, Hero } from '../components';
+import Personal from '../components/plans/Personal';
 
 const plans_urls = require('../resources/data/available-plans.json');
 
 export async function getStaticProps() {
-  
-  const plans = plans_urls.data.availablePlans
+
+  const plans =  plans_urls.data.availablePlans
 
   return {
     props: {plans}
@@ -61,18 +62,20 @@ const HomePage = ({plans}) => {
       </Container>
 
       <Container>
-        <h2 id="planos" className="uk-text-center uk-margin-bottom">Conheça nossos planos</h2>
-        <div className="uk-column-1-3">
-          {plans?.map((plan)=> {
-            return plan.type === "individual" ?
-              <div key={plan.planId} className="uk-placeholder uk-margin-large-bottom uk-text-center">
-                {plan.offerInfo.name}
-              </div> :  null
-            })
-          }
+        <h2 id="planos" className="uk-text-center uk-margin-bottom ">Conheça nossos planos</h2>
+        <div className="uk-child-width-expand uk-grid-match" data-uk-grid>
+          <div>
+              <Personal plan={plans[0]}/>
+          </div>
+           <div>
+              <Personal plan={plans[1]}/>
+           </div>
+           <div>
+              <Personal plan={plans[2]}/>
+           </div>
         </div>
+          
       </Container>
-
       <Container>
         <div className="uk-column-1-2">
           <div>
