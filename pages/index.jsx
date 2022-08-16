@@ -63,21 +63,23 @@ const HomePage = ({plans}) => {
 
       <Container>
         <h2 id="planos" className="uk-text-center uk-margin-bottom ">Conheça nossos planos</h2>
-        <div className="uk-child-width-expand uk-grid-match" data-uk-grid>
-          <div>
+        <div className="uk-child-width-1-3@m uk-child-width-1-1@s"  data-uk-grid data-uk-height-match=".plan-card-body">
+          <div className="uk-width-1-3@m">
               <Personal plan={plans[0]}/>
           </div>
-           <div>
+          <div className="uk-width-2-3@m uk-child-width-1-2@m uk-child-width-expand@s uk-grid-column-collapse uk-grid-match" data-uk-grid>
+              <div>
               <Personal plan={plans[1]}/>
-           </div>
-           <div>
+              </div>
+              <div>
               <Personal plan={plans[2]}/>
-           </div>
-        </div>
-          
+              </div>
+          </div>       
+        </div>     
       </Container>
+        <div className="uk-margin-large-top" style={{backgroundColor:"#E7F5FD"}} >
       <Container>
-        <div className="uk-column-1-2">
+        <div className="uk-column-1-2 uk-margin-top">
           <div>
             <img src="https://static.jusbr.com/deadpool/pro/image/recommended_plan_offer@2x.png" style={{ maxHeight: 400, marginBottom: 32 }} />
           </div>
@@ -96,6 +98,7 @@ const HomePage = ({plans}) => {
           Precisa de um plano para seu escritório, empresa ou órgão público? <a href="https://conteudo.jusbrasil.com.br/oportunidade-pro-pj?utm_source=jusbrasil&utm_medium=web&utm_campaign=new_landing_pro_basic">Conheça o plano Jusbrasil PRO para multiusuários</a>
         </p>
       </Container>
+        </div>
 
       <Footer />
     </Layout>

@@ -9,7 +9,7 @@ const Personal = ({plan}) => (
             { plan.offerInfo.benefits.map((item)=>(  
                 <div key={`container_${item}`} className="uk-flex ">
                     <div className=" uk-margin-right">
-                        <i class="uk-icon-button uk-text-success" data-uk-icon="icon: check; ratio:1"></i>
+                        <i className="uk-icon-button uk-text-success" data-uk-icon="icon: check; ratio:1"></i>
                     </div>
                     <div>
                     <p className="uk-text-small uk-text-secondary uk-text-left" key={`text_${item}`}>{item}</p>
