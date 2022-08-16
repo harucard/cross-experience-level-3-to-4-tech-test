@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Container, Footer, Layout, Navbar, Hero } from '../components';
 import Personal from '../components/plans/Personal';
+import Bundle from '../components/plans/Bundle';
 
 const plans_urls = require('../resources/data/available-plans.json');
 
@@ -79,19 +80,22 @@ const HomePage = ({plans}) => {
       </Container>
         <div className="uk-margin-large-top" style={{backgroundColor:"#E7F5FD"}} >
       <Container>
-        <div className="uk-column-1-2 uk-margin-top">
+        <div className="uk-column-1-2@m uk-margin-top">
           <div>
             <img src="https://static.jusbr.com/deadpool/pro/image/recommended_plan_offer@2x.png" style={{ maxHeight: 400, marginBottom: 32 }} />
           </div>
           <div>
             <h3>Pacotes recomendados</h3>
+            <div className="uk-child-width-1-1 uk-grid-collapse" data-uk-grid>
             {plans?.map((plan)=> {
               return plan.type === "bundle" ?
-                <div key={plan.planId} className="uk-placeholder">
-                  {plan.offerInfo.name}
+                <div key={plan.planId}>
+                  <Bundle plan={plan}/>
                 </div> :  null
               })
             }                 
+              
+            </div>
           </div>
         </div>
         <p className="uk-text-center uk-margin-large-bottom">

@@ -3,7 +3,7 @@ const Personal = ({plan}) => (
    <>
       <div className="uk-card uk-card-default uk-position-relative">
             <div className="uk-text-center uk-margin-top">
-                <h3 className="uk-card-title uk-margin-remove ">{plan.offerInfo.name}</h3>
+                <h3 className="uk-card-title uk-margin-remove">{plan.offerInfo.name}</h3>
             </div>
             <div className="uk-card-body plan-card-body">
             { plan.offerInfo.benefits.map((item)=>(  
