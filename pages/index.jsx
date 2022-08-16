@@ -3,15 +3,15 @@ import { Container, Footer, Layout, Navbar, Hero } from '../components';
 import Personal from '../components/plans/Personal';
 import Bundle from '../components/plans/Bundle';
 
-const plans_urls = require('../resources/data/available-plans.json');
-
-export async function getStaticProps() {
-
-  const plans =  plans_urls.data.availablePlans
-
+export async function getStaticProps(context) {
+  const response = await fetch('http:localhost:3000/api/plans');
+  const data = await response.json();
+  const plans = data.data.availablePlans
+  
   return {
     props: {plans}
   }
+
 }
 
 const HomePage = ({plans}) => {
