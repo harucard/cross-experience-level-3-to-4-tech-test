@@ -4,6 +4,8 @@
       {
         "brand": "MASTERCARD",
         "number": "5452 5389 4527 1089",
+        "name": "Marlene Silva Santos",
+        "balance": "500.00",
         "expiration": "10/2028",
         "cvv": "307",
         "description": "A card with $500 of balance."
@@ -11,6 +13,8 @@
       {
         "brand": "MASTERCARD",
         "number": "5361 9278 2540 8152",
+        "name": "Eduardo Machado Santana",
+        "balance": "500.00",
         "expiration": "01/2022",
         "cvv": "882",
         "description": "Just an expired card."
@@ -18,6 +22,8 @@
       {
         "brand": "VISA",
         "number": "4532 4957 4695 2291",
+        "name": "Maria Vitoria Almeida",
+        "balance": "0.00",
         "expiration": "08/2026",
         "cvv": "190",
         "description": "A card with no balance available."
