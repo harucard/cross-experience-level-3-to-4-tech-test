@@ -4,7 +4,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "jest"
+    "cypress": "cypress open"
   },
   "dependencies": {
     "next": "latest",
@@ -12,7 +12,8 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "babel-jest": "^28.1.3",
-    "jest": "^28.1.3"
+    "@testing-library/cypress": "^8.0.3",
+    "@testing-library/dom": "^8.17.1",
+    "cypress": "^10.6.0"
   }
 }
