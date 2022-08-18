@@ -11,3 +11,9 @@ Quanto á informação de planos foi utilizados os mesmos disponibilizados no js
 As informações de cartão em [resources/cards] foram adicionados alguns atributos como "balance" para verificar o limite do cartão
 
 Optei por utilizar como biblioteca de testes o Cypress para teste end-to-end que inclusive é recomendada na documentação do Next e que se mostrou muitos hábil para esse tipo de teste
+
+Para rodar os testes no Cypress rodar o comando:
+
+`npm run cypress`
+
+O arquivo de testes do Cypress se encontra em [cypress/e2e/index.cy.js]
