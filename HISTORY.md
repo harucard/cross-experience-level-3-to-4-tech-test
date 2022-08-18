@@ -17,7 +17,7 @@ Ao baixar o projeto do meu repositório,verifiquei que ocorria erros com a insta
 
 Sendo assim para rodar a aplicação a primeira vez é necessário rodar na raiz do projeto o comando
 
-`npm install cypress@10.6.0   --save-dev` (apenas na instalação do projeto.)
+`npm install cypress@10.6.0 --save-dev` (apenas na instalação do projeto.)
 
 E logo depois o comando
 
