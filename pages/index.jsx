@@ -3,7 +3,7 @@ import { Container, Footer, Layout, Navbar, Hero } from '../components';
 import Personal from '../components/plans/Personal';
 import Bundle from '../components/plans/Bundle';
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const response = await fetch('http:localhost:3000/api/plans');
   const data = await response.json();
   const plans = data.data.availablePlans

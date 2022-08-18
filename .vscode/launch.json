@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "pwa-chrome",
+            "name": "http://router.basePath",
+            "request": "launch",
+            "url": "http://router.basePath"
+        }
+    ]
+}

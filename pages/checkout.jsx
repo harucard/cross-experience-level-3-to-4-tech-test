@@ -1,7 +1,86 @@
 import Head from 'next/head'
+import { useEffect,useState } from 'react';
+import { useRouter } from 'next/router'
 import { Container, Footer, Layout, Navbar, Hero } from '../components';
 
+
 const HomePage = () => {
+  const [planName, setPlanName] = useState("");
+  const [price, setPrice] = useState("");
+  const [error, setError] = useState({});
+  const [form, setForm] = useState({
+    card_number:"",
+    month:"",
+    year:"",
+    cvv:"",
+    card_name:""
+  });
+
+  const handleOnChange = (e, attribute) =>{
+    let temp_object = {}
+    temp_object = {...form}
+    temp_object[attribute] = e.target.value
+    
+    setForm(temp_object)   
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError({});
+
+    try {
+      let data ={...form}
+      data["price"] = price.replace(",",".");
+      
+      const response = await fetch("/api/checkout", {
+        method:"POST",
+        body:JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+
+      const data_response = await response.json();
+
+      if(response.status === 200){
+        UIkit.notification({
+          message: data_response.message,
+          status: 'success',
+          pos: 'top-center',
+          timeout: 3000
+        });
+        setTimeout(()=>window.location.href="/", 3000);        
+      }else if(response.status === 500){
+        if(data_response.message){
+          UIkit.notification({
+            message: data_response.message,
+            status: 'danger',
+            pos: 'top-center',
+            timeout: 3000
+          });
+        }else  
+          setError(data_response)      
+      }else if(response.status === 405){
+        UIkit.notification({
+          message: data_response.message,
+          status: 'danger',
+          pos: 'top-center',
+          timeout: 3000
+        });
+      }
+    }catch(err) {
+      console.log("Erro",err)
+    }
+  }
+
+  useEffect(()=>{
+    const params = new URLSearchParams(window.location.search)
+
+    setPlanName(params.get("name"));
+    setPrice(params.get("price"));
+    
+  },[planName,price]);
+
   return (
     <Layout>
       <Head>
@@ -20,11 +99,11 @@ const HomePage = () => {
             <div className="uk-grid uk-child-width-expand">
               <div>
                 <h2 className="uk-text-meta">Produto</h2>
-                <p>[NOME DO PLANO]</p>
+                <p>{planName}</p>
               </div>
               <div>
                 <h2 className="uk-text-meta">Total</h2>
-                <p>[TOTAL]</p>
+                <p>{price}</p>
               </div>
             </div>
           </div>
@@ -33,24 +112,29 @@ const HomePage = () => {
               <h3><i data-uk-icon="icon: credit-card"></i> Cartão de crédito</h3>
               <p>Preencha abaixo todos os campos para comtinuar com a sua compra.</p>
 
-              <form>
+              <form onSubmit={(e)=>handleSubmit(e)}>
                 <fieldset className="uk-fieldset">
                   <div className="uk-margin">
-                    <input type="text" className="uk-input" placeholder="NUMERO DO CARTÃO" />
+                    <input type="text" className="uk-input" onChange={(e)=>handleOnChange(e,"card_number")} value={form.card_number} placeholder="NUMERO DO CARTÃO" />
+                    {error?.card_number ? <span className="uk-text-small uk-text-danger">{error.card_number}</span> : null }
                   </div>
                   <div className="uk-grid uk-child-width-1-4" data-uk-grid>
                     <div>
-                      <input type="text" className="uk-input" placeholder="MÊS" maxLength="2" />
+                      <input type="number" className="uk-input" onChange={(e)=>handleOnChange(e,"month")} value={form.month} placeholder="MÊS" maxLength="2" />
+                      {error?.month ? <span className="uk-text-small uk-text-danger">{error.month}</span> : null }
                     </div>
                     <div>
-                      <input type="text" className="uk-input" placeholder="ANO" maxLength="4" />
+                      <input type="number" className="uk-input" onChange={(e)=>handleOnChange(e,"year")} value={form.year} placeholder="ANO" maxLength="4" />
+                      {error?.year ? <span className="uk-text-small uk-text-danger">{error.year}</span> : null }
                     </div>
                     <div>
-                      <input type="text" className="uk-input" placeholder="CVV" maxLength="4" />
+                      <input type="number" className="uk-input" onChange={(e)=>handleOnChange(e,"cvv")} value={form.cvv} placeholder="CVV" maxLength="4" />
+                      {error?.cvv ? <span className="uk-text-small uk-text-danger">{error.cvv}</span> : null }
                     </div>
                   </div>
                   <div className="uk-margin">
-                    <input type="text" className="uk-input" placeholder="NOME IMPRESSO NO CARTÃO" />
+                    <input type="text" className="uk-input" onChange={(e)=>handleOnChange(e,"card_name")} value={form.card_name} placeholder="NOME IMPRESSO NO CARTÃO" />
+                    {error?.card_name ? <span className="uk-text-small uk-text-danger">{error.card_name}</span> : null }
                   </div>
                 </fieldset>
                 <input type="submit" value="ASSINAR AGORA!" className="uk-button uk-button-primary" />

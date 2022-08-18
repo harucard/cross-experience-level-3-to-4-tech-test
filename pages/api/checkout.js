@@ -29,7 +29,7 @@ const checkout = (req, res) => {
        hasLimit(req) ? res.status(200).json({message:"Compra Efetuada com sucesso"}) : 
        res.status(405).json({message:"Cartão sem limite.Verifique com sua operadora do cartão"})
    }else
-    res.status(500).json({message:"cartão inválido"})  
+    res.status(500).json({message:"Cartão Inválido.Verifique os dados informados"})  
 }
 
 const hasLimit = (req) => {
