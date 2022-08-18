@@ -48,7 +48,7 @@ describe('Test end to end', () => {
 
   })
 
-  it('Testing card with no balance',()=>{
+  it('Testing low balance card',()=>{
     cy.visit('/checkout?name=Processos&price=29,00');
    
     cy.get("input[placeholder=\"NUMERO DO CARTÃO\"]").type("4532 4957 4695 2291");
